@@ -1,0 +1,28 @@
+
+ <table class="table table-responsive-sm mb-0">
+<thead>
+<tr>
+    <th scope="col">Prodect Image</th>
+   
+	<th scope="col">Prodect Name</th>
+    <th scope="col">Price</th> 
+	<th scope="col">Quntaty</th> 
+ 
+   
+    
+</tr>
+</thead>
+<tbody>
+
+{%for p in prodectdetails %}
+  <tr>
+  	<td><img src="{{p.prodectImage }}" style="height: 50px"></td>
+  	<td>{{p.prodectName}}</td>
+  	<td>{{p.prodectPrice}}</td>
+  	<td>{{p.quantity}}</td>
+  </tr>
+  
+  
+
+{%endfor%}
+</tbody>

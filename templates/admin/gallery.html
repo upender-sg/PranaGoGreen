@@ -1,0 +1,101 @@
+ {% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+ <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> Gallery</h1>
+           
+        </div>
+         <p><a class="btn btn-primary icon-btn" data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)"><i class="fa fa-plus"></i>New</a></p>
+      </div>
+       <!-------------------------------->
+	   
+	          <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">id</th>
+                      <th class="text-center">image</th>                      
+                      
+                      <th class="text-center">Action</th>
+					   
+                    </tr>
+                  </thead>
+                  <tbody>  {% for images in gallery %}
+                    <tr>
+                    
+                      <td class="text-center">{{ images.id }} </td>
+                      <td class="text-center" id="images{{ images.id }}">
+                     <img src="/{{ images.image }}" style="height: 60px"/></td>
+                      
+                      
+                      <td class="text-center">
+                        <div class="btn-group"> 
+                        
+                          
+                        <a class="btn btn-primary"   href="/dashboard/gallerydelete?gid={{ images.id }}"><i class="fa fa-lg fa-trash"></i></a>
+                      </div></td>
+					   
+                    </tr>
+                    
+                       {% endfor %} 
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Image</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+      <form action="/dashboard/gallery"  method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        <!----------------------------------->
+        <div class="col-lg-6">
+               
+   {% csrf_token %}
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input class="form-control"  autocomplete ="off" id="" type="text" aria-describedby="catTitlle"  name="name" placeholder="Enter Name"/> 
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Image</label>
+                    <input class="form-control"  autocomplete ="off" id="" type="file" aria-describedby="catTitlle" name="image" placeholder="Enter Name"> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+        <!-------------------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="addnewCat"  class="btn btn-primary">Add New</button>
+      </div> </form>
+    </div>
+  </div>
+</div>
+
+ 
+  {% endblock %}   }
+ 
+    

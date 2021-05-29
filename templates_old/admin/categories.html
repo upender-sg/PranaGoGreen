@@ -1,0 +1,147 @@
+ {% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+ <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> Categories</h1>
+           
+        </div>
+         <p><a class="btn btn-primary icon-btn" data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)"><i class="fa fa-plus"></i>New</a></p>
+      </div>
+       <!-------------------------------->
+	   
+	          <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">id</th>
+                      <th class="text-center">Title</th>                      
+                      
+                      <th class="text-center">Action</th>
+					   
+                    </tr>
+                  </thead>
+                  <tbody>  {% for cats in Categories %}
+                    <tr>
+                    
+                      <td class="text-center">{{ cats.id }} </td>
+                      <td class="text-center" id="cattdname_{{ cats.id }}">{{ cats.cat_name }}</td>
+                      
+                      
+                      <td class="text-center"><div class="btn-group"> 
+                        
+                         <a class="btn btn-primary"  data-toggle="modal" data-target="#catedit_{{  cats.id }}"   href="javascript:void(0)"><i class="fa fa-lg fa-edit"></i></a>
+                        <a class="btn btn-primary" id="cat_del_{{  cats.id }}" href="javascript:void(0)"><i class="fa fa-lg fa-trash"></i></a>
+                      </div></td>
+					   
+                    </tr>
+                     <div class="modal fade" id="catedit_{{  cats.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      
+
+                      <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Edit Category</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div> 
+
+                          <div class="modal-body">
+                          <!----------------------------------->
+                          <div class="col-lg-6">
+
+                          <div class="form-group">
+                          <label for="exampleInputEmail1">Title</label>
+                          <input class="form-control"  autocomplete ="off" id="Editcatname_{{cats.id}}" type="text" aria-describedby="catTitlle"  value="{{ cats.cat_name }}" name="catname" placeholder="Enter Name"/> 
+                          </div>
+
+                            <div class="form-group">
+                            <label for="exampleInputEmail1">Image</label>
+                            <input class="form-control"  autocomplete ="off" id="" type="file" aria-describedby="catTitlle" name="catimage" placeholder="Enter Name"> 
+                            </div>
+                            <img style='height: 200px' src="{{ cats.catimage }}">
+
+                         </div>
+
+                      </div>
+
+                   <div class="modal-footer">
+        <button type="button"   class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="EditCat_{{ cats.id }}"  class="btn btn-primary">Save</button>
+      </div>
+
+                         </div>
+
+                      </div>
+
+
+
+
+                     </div>
+                       {% endfor %} 
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Category</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+      <form action="/dashboard/addcategory"  method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        <!----------------------------------->
+        <div class="col-lg-6">
+               
+   {% csrf_token %}
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input class="form-control"  autocomplete ="off" id="" type="text" aria-describedby="catTitlle"  name="catname" placeholder="Enter Name"/> 
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Image</label>
+                    <input class="form-control"  autocomplete ="off" id="" type="file" aria-describedby="catTitlle" name="catimage" placeholder="Enter Name"> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+        <!-------------------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="addnewCat"  class="btn btn-primary">Add New</button>
+      </div> </form>
+    </div>
+  </div>
+</div>
+
+{% for p in prodects %}
+
+
+
+   {% endfor %}
+  {% endblock %}   }
+ 
+    

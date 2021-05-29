@@ -1,0 +1,133 @@
+{% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+       <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i>Vendor Prodects</h1>
+        </div>
+
+
+
+
+      </div> 
+
+
+   
+
+                  <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+
+ 
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th>Image</th>
+                      <th>Title</th>
+                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Sold</th>
+                      
+                      <th>Position</th>
+                      <th> State</th>
+            <th>Action</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                      {% for pro in prodects %}
+                      <input type="hidden" value="{{pro.mainimg}}"  id="imgiput_{{pro.id}}">
+                         
+                    <tr>
+                      <td><center>
+                        <img src="{{pro.thumbimg}}" id="img_{{pro.id}}" style="height: 40px"></center> </td>
+                      <td>{{ pro.name }}   <br></td>
+                      <td>{{ pro.price }}</td>
+                      <td  id="td_{{pro.id}}" > <span id="pprice_{{pro.id}}"> 
+                      {{ pro.quantity }}   </td>
+                      <td> {{ pro.sold }}</td>
+                    
+                      <td>{{ pro.position }}</td>
+
+                     <td>   <center>
+                  
+                      {%if   pro.approved %}  <a class="" id="curentstate_{{  pro.id }}"  data-toggle="modal" data-target="#catedit_{{pro.id}}"  href="javascript:void(0)">Approved</a> {%endif%} {%if not pro.approved %} 
+                          <a class=" "  id="curentstate_{{  pro.id }}"   data-toggle="modal" data-target="#catedit_{{pro.id}}"   href="javascript:void(0)"> Not Approved  </a> {%endif%}</center></td>
+                            
+                        <td>
+
+                       <div class="btn-group"> 
+                          <a href="javascript:void(0)"    class="btn   btn-warning"   onclick="window.open( '/singleprodect/?pid={{ pro.id }}', 'name', 'location=no,scrollbars=yes,status=no,toolbar=yes,resizable=yes,fullscreen=yes' )"> <i class="fa fa-file-text-o fa-fw"></i></a>
+                        
+                       <!-- <a class="btn btn-primary"  href="/dashboard/editprodect?pid={{ pro.id }}"><i class="fa fa-lg fa-edit"></i></a>
+                        <a class="btn btn-danger" id="cat_del_" href="/dashboard/deleteprodect?id={{ pro.id }}"><i class="fa fa-lg fa-trash"></i></a>-->
+                      </div>
+                     
+                     </td>
+
+                   
+
+                         <div class="modal fade" id="catedit_{{  pro.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      
+
+                      <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel"> State</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div> 
+
+                          <div class="modal-body">
+                          <!----------------------------------->
+                          <div class="col-lg-6">
+
+                          <div class="form-group">
+                          <label for="exampleInputEmail1">Title</label>
+                            <select class="form-control"   id="statevalue_{{pro.id}}" >
+                              <option value="">SelectState</option>
+                               <option value="1" >
+                                Approve
+                              </option>
+                                <option value="0" >   Cancle Approve </option>
+
+                            </select>
+                          </div>
+ 
+                          
+                         </div>
+
+                      </div>
+
+                   <div class="modal-footer">
+        <button type="button"   class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="prodectApprove_{{ pro.id}}"  class="btn btn-primary">Ok</button>
+      </div>
+
+                         </div>
+
+                      </div>
+
+
+
+
+                     </div>
+          
+                    </tr>
+                       {% endfor %}
+                     
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    
+  {% endblock %}   }

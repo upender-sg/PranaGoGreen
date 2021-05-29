@@ -1,0 +1,23 @@
+
+  {% load todaydeals_filter  %} 
+  {%for p in prodectsByCats %}
+                       <tr>
+                      <td ><center>
+                        <img src="{{ p.thumbimg }}" id="img_{{ p.id }}" style="height: 40px"></center> </td>
+                      <td>{{p.name}}  <br></td>
+                      <td><input   id="selected_todaylist_{{ p.id }}"  type="checkbox"  {% ifequal    p.position    'todaydeals' %}  checked {% endifequal  %}/>  {{ p.position}}</td> 
+                      
+ 
+                      
+                      <input type="hidden" value="" id="imgiput_{{ p.id }}">
+                         
+                    </tr>
+
+                    {% endfor %}
+
+
+
+                    <script type="text/javascript">
+                      
+
+                    </script>

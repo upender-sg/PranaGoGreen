@@ -1,0 +1,29 @@
+
+  {% load todaydeals_filter  %} 
+  {%for p in prodectsByCats %}
+                       <tr>
+                      <td><center>
+                        <img src="/static/upload/prodectimages/1612429701009_Desert.jpg" id="img_11" style="height: 40px"></center> </td>
+                      <td>Arguments   {{ p.id |prodectfilter_postion:10 }} <br></td>
+                      <td>500</td>
+                      <td id="td_11"> <span id="pprice_11"> 
+                      45   </span></td>
+                      <td> 0</td>
+                      <td>admin</td>
+                      <td>todaydeals</td>
+
+
+                        <td>
+
+                        <div class="btn-group"> 
+                        <a class="btn btn-primary" id="cat_edit_" href="javascript:void(0)"><i class="fa fa-lg fa-edit"></i></a>
+                        <a class="btn btn-primary" id="cat_del_" href="/dashboard/deleteprodect?id=11"><i class="fa fa-lg fa-trash"></i></a>
+                      </div>
+ </td>
+
+                      
+                      <input type="hidden" value="" id="imgiput_12">
+                         
+                    </tr>
+
+                    {% endfor %}

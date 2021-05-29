@@ -1,0 +1,137 @@
+   
+    <!-- Sidebar menu-->
+    <div class="app-sidebar__overlay" data-toggle="sidebar"></div>
+     
+    <aside class="app-sidebar">
+ 
+      <div class="app-sidebar__user">
+        <div>
+          <p class="app-sidebar__user-name">{{request.user}}</p>
+         
+        </div>
+      </div>
+      <ul class="app-menu">
+
+        <li><a class="app-menu__item" href="/dashboard"><i class="app-menu__icon fa fa-dashboard"></i>
+    <span class="app-menu__label">Dashboard{{ request.user.is_sadmin }}</span></a></li>
+    {% if request.user.is_sadmin %}
+         <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Manage Categories</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/categories"><i class="icon fa fa-circle-o"></i>
+      All categories</a></li>
+            
+            <li><a class="treeview-item" href="/dashboard/subcategories"><i class="icon fa fa-circle-o"></i>
+      All subcategories</a></li>
+        
+         
+       </ul>
+        </li>
+{%endif%}
+            <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Manage Prodects</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/prodects"><i class="icon fa fa-circle-o"></i>
+      All Prodect</a></li>
+            
+            
+           </ul>
+            {% if request.user.is_sadmin %}
+            <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/vendorprodects"><i class="icon fa fa-circle-o"></i>
+      Vendor Prodect</a></li>
+            
+            
+           </ul>
+           {%endif%}
+        </li>
+
+                <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Manage Orders</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/orders"><i class="icon fa fa-circle-o"></i>
+      All orders</a></li>
+            
+             
+        
+         
+       </ul>
+
+
+        </li>  
+  {% if request.user.is_sadmin %}
+        <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Manage Vendor</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/vendor"><i class="icon fa fa-circle-o"></i>
+      All Vendors</a></li>
+            
+             
+        
+         
+       </ul>
+
+
+        </li>  
+       
+  
+          <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">settings</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+           <li><a class="treeview-item" href="/dashboard/homesettings"><i class="icon fa fa-circle-o"></i>
+            Home Prodects Settings</a></li>
+            <li><a class="treeview-item" href="/dashboard/settings "><i class="icon fa fa-circle-o"></i>
+      Site Settings</a></li>
+
+           <li><a class="treeview-item" href="/dashboard/sliders"><i class="icon fa fa-circle-o"></i>
+      Manage Sleder</a></li>
+
+
+           <li><a class="treeview-item" href="/dashboard/zipcode"><i class="icon fa fa-circle-o"></i>
+             Zipcode</a></li>
+            
+            
+        
+         
+       </ul>
+        </li> 
+        
+
+                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Blog</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/blog"><i class="icon fa fa-circle-o"></i>
+      Manage Blog</a></li>
+            
+             
+        
+         
+       </ul>
+        </li> 
+
+
+                 <li class="treeview"><a class="app-menu__item" href="#" data-toggle="treeview">
+    <i class="app-menu__icon fa fa-laptop"></i><span class="app-menu__label">Gallery</span>
+    <i class="treeview-indicator fa fa-angle-right"></i></a>
+          <ul class="treeview-menu">
+            <li><a class="treeview-item" href="/dashboard/gallery"><i class="icon fa fa-circle-o"></i>
+      Manage Gallery</a></li>
+            
+             
+        
+         
+       </ul>
+        </li> 
+         <li><a class="treeview-item" href="/dashboard/userPurcheslist"><i class="icon fa fa-circle-o"></i>
+             Users</a></li> 
+              {%endif%} 
+        
+          </ul>
+    </aside>
+ 

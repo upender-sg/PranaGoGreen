@@ -1,0 +1,238 @@
+ {% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+  <style>
+    @media screen and (min-width: 676px) {
+        .modal-dialog {
+          max-width: 80%; /* New width for default modal */
+        }
+    }
+</style>
+         <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> All Vendors</h1>
+           
+        </div>
+         <p><a class="btn btn-primary icon-btn" data-toggle="modal" data-target="#exampleModal" href="javascript:void(0)"><i class="fa fa-plus"></i>New</a></p>
+      </div>
+       <!-------------------------------->
+	   
+	          <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">id</th>
+                      <th class="text-center">Name</th> 
+                      <th class="text-center">PhoneNumber</th>
+                       <th class="text-center">Email</th>
+                      <th class="text-center">Status</th>
+                       <th class="text-center">Action</th>
+					   
+                    </tr>
+                  </thead>
+                  <tbody>  {% for v in vendors %}
+                    <tr>
+                    
+                      <td class="text-center">{{ v.id }} </td>
+                      <td class="text-center">{{ v.fullname }}</td>
+                       <td class="text-center">{{ v.mobile }}</td> 
+                         <td class="text-center">{{ v.email }}</td> 
+                        <td class="text-center">{% if v.active  %}
+                       <span  class="badge badge-success">Activated
+                        </span> {%endif%} 
+                          {% if not  v.active  %} <span class="badge badge-danger"> Deactivate </span> {%endif%}  
+                      
+                        <!--<select>
+                          <option value="">Select activation</option>
+                          <option {% if v.active  %}  selected="selected" {%endif%}  value="1">Activate</option>
+                           <option  {% if not  v.active  %}  selected="selected" {%endif%}  value="0">Deactivate </option>
+                        </select>--->
+
+                      </td> 
+
+                      <td class="text-center"><div class="btn-group"> 
+                        <button  id="#venderActivatebutton{{ v.id }}"  data-toggle="modal" data-target="#venderActivate{{ v.id }}" class="btn  {% if v.active  %}
+                           btn-warning {%endif%} {% if not  v.active  %} btn-secondary {%endif%}
+
+                            btn-sm" type="button"> <i class="fa fa-user fa-lg"></i></button>
+                         <button   data-toggle="modal" data-target="#sendMail{{ v.id }}" class="btn btn-primary btn-sm" type="button"> <i class="fa fa-envelope-o fa-fw"  ></i>  </button>
+                        
+                   <button class="btn btn-danger btn-sm" type="button"><i class="fa fa-trash-o"></i></button>
+                       
+                      </div></td>
+					   
+                    </tr>
+                    
+ <div class="modal fade" id="sendMail{{ v.id }}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel{{ v.id }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel{{ v.id }}">Send Mail to {{ v.fullname }}</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+     
+      <div class="modal-body">
+        
+        <div class="col-lg-12">
+          <!----------------------------------->
+          
+           <div class="form-group">
+                    <label for="exampleInputEmail1">Mail id</label>
+                    <input class="form-control" readonly value="{{ v.email }}"  name="mailid" autocomplete ="off" id="mailid_{{ v.email }}" type="text" aria-describedby="title"  required=""  placeholder="Enter First  Name"/> 
+                  </div>
+
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">New Massage</label>
+                    <textarea  class="form-control" name="massaage" id="massage_{{ v.id }}" > </textarea>
+                     </div>
+           
+            
+           <!----------------------------------->
+
+ </div>
+        <!-------------------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" id="mail_send_{{ v.id }}"  class="btn btn-primary">Send</button>
+      </div>  
+    </div>
+  </div>
+</div>
+<!----------------------------------------------------------------------------------->
+
+<!------------------------------------------------------------------------------------>
+  <div class="modal fade" id="venderActivate{{ v.id }}" tabindex="-1" role="dialog" aria-labelledby="venderActivateexampleModalLabel{{ v.id }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="venderActivateexampleModalLabel{{ v.id }}">{% if v.active  %}Deactivate{%endif%} {% if not v.active  %}  Activate{%endif%}    {{ v.fullname }} Acount 
+
+        </h5>
+        <br>
+        <span id="activatedstatus_{{v.id}}"></span>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+      <form action="/signup/"  method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        
+        <div class="col-lg-12">
+          <!----------------------------------->
+          {% if not v.active  %}
+          <h3>To activate  {{ v.fullname }}   account,Please click on the activate button.</h3>
+          {%endif%} {% if v.active  %}
+    <h3>To Deactivate  {{ v.fullname }}   account,Please click on the deactivate button.</h3>
+          {%endif%}
+           <!----------------------------------->
+
+ </div>
+        <!-------------------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">No</button>
+      {% if not v.active  %}  <button type="button" email="{{ v.email }}" id="acitvatevender_{{v.id}}_activate"  class="btn btn-primary">  Activate</button>{%endif%}
+ {% if  v.active  %} 
+  <button type="button"  email="{{ v.email }}"   id="acitvatevender_{{v.id}}_deacticate"  class="btn btn-primary">  Deactivate</button>{%endif%}
+
+      </div> </form>
+    </div>
+  </div>
+</div>
+<!----------------------------------------------------------------------------------->
+
+
+                       {% endfor %} 
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">New Vendor</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div> 
+      <form action="/signup/"  method="POST" enctype="multipart/form-data">
+      <div class="modal-body">
+        <!----------------------------------->
+        <div class="col-lg-12">
+               
+   {% csrf_token %}
+                  
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Firs Name</label>
+                    <input class="form-control"  name="fname" autocomplete ="off" id="" type="text" aria-describedby="title"  required=""  placeholder="Enter First  Name"/> 
+                  </div>
+
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Last Name</label>
+                    <input class="form-control"  name="lastname" autocomplete ="off" id="" type="text" aria-describedby="title"  required=""   placeholder="Enter Last Name"/> 
+                  </div>
+
+                   <div class="form-group">
+                    <label for="exampleInputEmail1">Phone Number</label>
+                    <input class="form-control"  name="mobile" autocomplete ="off" id="" type="text" aria-describedby="title"  required=""   placeholder="Enter Phone Number"/> 
+                  </div>
+
+                   <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input class="form-control"  name="email" autocomplete ="off" id="" type="text" aria-describedby="title" required=""   placeholder="Enter Email"/> 
+                  </div>
+
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Password</label>
+                    <input class="form-control"  name="password" autocomplete ="off" id="" type="password" aria-describedby="title"  required=""   placeholder="Enter  Password"/> 
+                  </div>
+
+
+                    <div class="form-group">
+                    <label for="exampleInputEmail1">Conform Password</label>
+                    <input class="form-control"  name="cpassord" autocomplete ="off" id="" type="text" aria-describedby="title"  required=""   placeholder="Enter Conform Password"/> 
+                 
+                    <select name="usertype" class="form-control">
+                                     <option value="">Select UserType</option>
+                                     <option value="user" >User</option>
+                                      <option selected="selected" value="vender">Vender</option>
+                                 </select>
+
+                             </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+        <!-------------------------------------->
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="submit" id="addnewCat"  class="btn btn-primary">Add New</button>
+      </div> </form>
+    </div>
+  </div>
+</div>
+<!------------------------------------------------------------------------------------>
+ 
+ 
+  {% endblock %}   }
+ 
+    

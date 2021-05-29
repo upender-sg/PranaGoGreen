@@ -1,0 +1,158 @@
+      
+{% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+      <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> Prodects</h1>
+        
+        </div>
+        
+      </div>
+       <!-------------------------------->
+	  
+	          <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+        <div class="col-lg-12">
+                <form id="addprodectform" action="" method="post"  enctype="multipart/form-data" >
+                  {%  csrf_token  %}
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input class="form-control" id="title"
+                     type="text"  name="prodect_title"  value="{{prodects.name}}" required="required" placeholder="Enter Title">
+                    
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleInputPassword1">category</label>
+                    <select class="form-control" required="required"  name="category_id" id="allcats">
+                      <option value="">Select Category</option>
+                        {% for c in categories %}
+                          <option value="{{ c.id }}" {%if c.id == prodects.cat_id %} selected {%endif%}>{{ c.cat_name}}</option>
+                        {% endfor %}
+                       </select>
+                       <input type="hidden" id="category_name" name="category_name">
+                  </div>
+                  <div class="form-group">
+                    <label for="exampleSelect1">subcategory</label>
+                   <select class="form-control" required="required" id="subcat" name="subcategory_id">
+                     <option value=''>Select Subcatagory</option> 
+                      <option value='{{ prodects.subcat_id }}' selected="selected">{{ prodects.subcat_name }}</option>                     
+                    </select>  
+                     <input type="hidden" id="subcategory_name" name="subcategory_name">   
+                  </div>
+                  
+                  <div class="form-group">
+                    <label for="exampleTextarea">Description</label>
+                    
+                 <textarea id="txtEditor" name="description"> {{ prodects.description }}</textarea> 
+                  </div>
+
+                     <div class="form-group">
+                    <label for="exampleTextarea">Product Details</label>
+                    
+                 <textarea id="productdetails"     name="productdetails">{{ prodects.productdetails }}</textarea> 
+                  </div>
+
+                   
+    
+                 
+                  
+                
+
+
+                   <div class="form-group">
+                   
+         
+                    <label for="exampleInputFile">Price </label>
+                     <input class="form-control" required="required" id="prodect_price"
+                     type="text"  value=" {{ prodects.price }}" name="prodect_price"  placeholder="Price">
+                    
+                  </div>
+  <div class="form-group">                  
+         
+                    <label for="exampleInputFile">Old Price </label>
+                     <input class="form-control" id="prodect_oldprice"
+                     type="text"   value="{{ prodects.oldPrice }}"  name="prodect_oldprice"  placeholder="old Price">
+                    
+                  </div>
+                  
+                   <div class="form-group">
+                   
+         
+                    <label for="exampleInputFile">Discount </label>
+                     <input class="form-control" id="prodect_discountprice"
+                     type="text"  value="{{ prodects.discount }}"  name="discount"  value="0" placeholder="Discoun Price">
+                    
+                  </div>
+                   <div class="form-group">
+                   
+         
+                    <label for="exampleInputFile">Reference Pricing </label>
+                     <input class="form-control"  id="prodect_reference_pricing"
+                     type="text"   name="reference_pricing"  value="{{ prodects.preference_pricing }}" placeholder="Reference Price">
+                    
+                  </div>
+
+
+
+
+
+                  <div class="form-group">
+                   
+         
+                    <label for="exampleInputFile">Quantity </label>
+                     <input class="form-control" id="prodect_Quantity"
+                     type="text"  name="prodect_Quantity" required="required"  placeholder="Quantity">
+                    
+                  </div>
+
+                  <div class="form-group"> 
+                    <label for="exampleInputFile">Position </label>
+                      <select name="position" required="required"  class="form-control">
+                      <option value="">Select </option>
+                      <option value="no" {%if prodects.position == 'no'  %} selected {%endif%} >No porstion</option>
+                      <option value="new" {%if prodects.position == "new" %} selected {%endif%}>New</option>                      
+                      <option value="bestseller" {%if prodects.position == "bestseller" %} selected {%endif%}>BestSeller</option>
+                        <option value="featuredproducts" {%if prodects.position == 'featuredproducts' %}selected {%endif%}>Featured Products</option>
+
+                         <option value="todaydeals" {%if prodects.position == 'todaydeals' %}selected {%endif%}>todaydeals</option>
+
+                     </select>
+                    
+                    
+                  </div>
+
+
+
+                   <div class="form-group">
+                   
+         
+                    <label for="exampleInputFile">Prodect Images</label>
+                    <input type="file" class="form-control" required="required" name="prodectimages" multiple="">
+                  </div>
+                  <br>
+
+ 
+                   
+ 
+
+ <div class="form-group">
+ <div class="tile-footer">
+              <button class="btn btn-primary float-right" type="submit">Submit</button>
+            </div>
+   </div>
+
+                </form>
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {% endblock %}   }

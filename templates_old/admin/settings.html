@@ -1,0 +1,269 @@
+{% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+  <!-------------------------------->
+	   <div class="row">
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Title</h3>
+            <table class="table">
+                <form action="/dashboard/settings"  method="POST">
+              <tbody>
+                <tr>
+                  
+                  <td>
+
+<div class="col-lg-12">
+     
+                 
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Title</label>
+                    <input class="form-control" id="siteTitle" name="siteTitle" value="{{siteTitle}}" type="text" aria-describedby="catTitlle" placeholder="Enter Name"> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> 
+                    <button type="submit" id="savetitle" class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+                 
+                
+              </tbody>
+            </form>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Logo</h3>
+              <table class="table">
+              <form action="/dashboard/sitelogo" enctype="multipart/form-data" method="POST" >
+              <tbody>
+                <tr>
+                   
+
+
+                  <td>
+<div class="col-lg-12">
+     
+                 
+                  <div class="form-group">
+                    <img src="{{logo}}" style="height: 50px">
+                   
+                    <label for="exampleInputEmail1">Logo</label>
+                    {%  csrf_token  %}
+                    <input class="form-control" type= "file" name='sitelogo' id="sitelogo"   type="text" aria-describedby="catTitlle" placeholder="Enter Name"> 
+                    
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> <button type="submit"  class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+                 
+                
+              </tbody> </form>
+            </table>
+          </div>
+        </div>
+   
+        <div class="clearfix"></div>
+
+
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Phone Number</h3>
+            <table class="table">
+              
+              <tbody>
+                  <form action="/dashboard/sitephone"   method="POST" >
+                <tr>
+                  
+                  <td>
+
+<div class="col-lg-12">
+     
+                 {%  csrf_token  %}
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Phone Number</label>
+                    <input class="form-control" id="sitephone" value="{{sitephone}}" type="text" aria-describedby="catTitlle" name="sitephone" placeholder="Enter phone Number"> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> <button type="submit" id="" class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+              </form>   
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Email</h3>
+             <table class="table">
+              
+              <tbody>
+                  <form action="/dashboard/siteemail"   method="POST" >
+                <tr>
+                  
+                  <td>
+
+<div class="col-lg-12">
+     {%  csrf_token  %}
+                 
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email</label>
+                    <input class="form-control" name="siteemail" id="siteemail" value="{{siteemail}}" type="text" aria-describedby="catTitlle" name="siteemail" placeholder="Enter Email  "> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> <button type="submit"  class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+              </form>   
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+
+
+        <div class="clearfix"></div>
+
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title">Copyright</h3>
+          
+
+
+           <table class="table">
+              
+              <tbody>
+                  <form action="/dashboard/copyright"   method="POST" >
+                <tr>
+                  
+                  <td>
+
+<div class="col-lg-12">
+     {%  csrf_token  %}
+                 
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Copyright</label>
+                    <input class="form-control" name="copyright" id="copyright" value="{{copyright}}" type="text" aria-describedby="catTitlle" name="copyright" placeholder="Enter copyright  "> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> <button type="submit"  class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+              </form>   
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+      <div class="clearfix"></div>
+
+        <div class="col-md-6">
+          <div class="tile">
+            <h3 class="tile-title"> Reference price </h3>
+          
+
+
+           <table class="table">
+              
+              <tbody>
+                  <form action="/dashboard/referenceprice"   method="POST" >
+                <tr>
+                  
+                  <td>
+
+         <div class="col-lg-12">
+             {%  csrf_token  %}
+                 
+                  <div class="form-group">
+                    <label for="exampleInputEmail1"> Reference Price </label>
+                    <input class="form-control" name="reference_price" id="copyright" value="{{referenceprice}}" type="text" aria-describedby="reference_price"  placeholder="Enter reference price  "> 
+                  </div>
+                  
+                  
+                   
+                   
+               
+              </div>
+
+                  </td>
+                   
+                </tr>
+                <tr>
+                  <td> <button type="submit"  class="btn btn-primary">Save</button> </td>
+                  
+                   
+                </tr>
+              </form>   
+                
+              </tbody>
+            </table>
+          </div>
+        </div>
+   
+      </div>
+
+      
+  {% endblock %}   }

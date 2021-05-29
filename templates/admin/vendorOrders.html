@@ -1,0 +1,186 @@
+ {% extends 'admin/header.html' %}
+  {% block menubar %}
+   {% include "admin/menu.html" %} 
+  {% endblock %} 
+ {% block content %}
+  <style>
+    @media screen and (min-width: 676px) {
+        .modal-dialog {
+          max-width: 80%; /* New width for default modal */
+        }
+    }
+</style>
+ <div class="app-title">
+        <div>
+          <h1><i class="fa fa-dashboard"></i> All Orders</h1>
+           
+        </div>
+        
+      </div>
+       <!-------------------------------->
+     
+            <div class="row">
+        <div class="col-md-12">
+          <div class="tile">
+            <div class="tile-body">
+              <div class="table-responsive">
+
+                <table class="table table-hover table-bordered" id="sampleTable">
+                  <thead>
+                    <tr>
+                      <th class="text-center">id</th>
+                      <th class="text-center">Order Id</th>                      
+                      <th class="text-center">Total Price</th>  
+                      <th class="text-center">Subtotal Price  </th> 
+                       <!--<th class="text-center">Shipping  Price  </th> -->
+                  <th class="text-center">Order Date  </th> 
+                    <th class="text-center">Shipping Addras </th> 
+                      <th class="text-center">Status</th>
+                      <th class="text-center">More</th>
+                    </tr>
+                  </thead>
+                  <tbody>  {% for porders in pending_orders %}
+                     
+                    <tr>
+                   
+                      <td class="text-center"> {{ forloop.counter }} </td>
+                      <td class="text-center">{{ porders.orderId }}</td>
+                        <td class="text-center">{{ porders.totalPrice }}</td>
+                          <td class="text-center">{{ porders.subtotalPrice }}</td>
+                        <!-- <td class="text-center">{{ porders.shippingprice }}</td>-->
+                         <td class="text-center">{{ porders.orderDate }}</td>
+                         <td class="text-center"><i class="fa fa-file-text-o fa-fw" class="btn btn-danger" data-toggle="modal"  data-target="#shippingaddres_{{porders.id}}" ></i>
+                         <!--{{ porders.shippingAddras }}--></td>
+                      <td class="text-center"><div class="btn-group"> 
+                        
+                        <button type="button" class="btn   {%if   porders.orderState  == '1' %} btn-danger   {%endif%} {%if   porders.orderState  == '2' %}btn-warning   {%endif%} {%if   porders.orderState  == '3' %}btn-info   {%endif%}
+                           {%if   porders.orderState  == '4' %}btn-primary   {%endif%} {%if   porders.orderState  == '5' %} btn-secondary  {%endif%}  {%if   porders.orderState  == '6' %} btn-dark  {%endif%}"  
+                        data-toggle="modal" data-target="#states_{{porders.id}}"   >
+                        {%if   porders.orderState  == "1" %}  Pendinig{%endif%}
+                         {%if   porders.orderState  == "2" %}  processing{%endif%}
+                          {%if   porders.orderState  == "3" %}  Shipped {%endif%}
+                         {%if   porders.orderState  == "4" %}  Completated {%endif%}
+                           {%if   porders.orderState  == "5" %}  Cancelled {%endif%}
+                             {%if   porders.orderState  == "6" %}  Refunded {%endif%}
+                       
+                      </button>
+
+                       </div>  </td>
+
+                       <td> <a class="btn btn-primary btn-sm" ><i class="fa fa-reply"></i> </a> </td>
+                   
+                    </tr> 
+                  
+                   
+                    <!------------------------------------------------------>
+
+                     <div class="modal fade" id="states_{{porders.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Change Status</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div> 
+
+                          <div class="modal-body"><center><span id="massage"> </span></center>
+                          <!----------------------------------->
+                          <div class="col-lg-6">
+
+                          
+                             
+                            <select  class="form-control"   id="changeState___{{porders.id}}" class="form-control">
+                                <option  value="" >Select</option>
+          <option  value="1"  {%if   porders.orderState  == "1" %} selected {%endif%}>Pending</option>
+          <option value="2"  {%if   porders.orderState  == "2" %} selected {%endif%}>Processing</option>
+          <option value="3" {%if   porders.orderState  == "3" %} selected {%endif%}>Shipped</option>
+          <option value="4" {%if   porders.orderState  == "4" %} selected {%endif%}>Complete</option>          
+          <option value="5" {%if   porders.orderState  == "5" %} selected {%endif%}>Canceled</option>
+          <option value="6" {%if   porders.orderState  == "6" %} selected {%endif%}>Refunded</option>
+        </select> 
+      
+
+                         </div>
+
+                      </div>
+
+                   <div class="modal-footer">
+        <button type="button"   class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+
+                         </div>
+
+                      </div>
+
+
+
+
+                     </div>
+
+
+
+
+                       <div class="modal fade" id="shippingaddres_{{porders.id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                         <div class="modal-content">
+                           
+                      <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Shipping Addras</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                      </button>
+                      </div> 
+
+                          <div class="modal-body" id="shippingAddrasString_{{porders.id}}">
+                          {{porders.shippingAddras }}
+                          <div class="col-lg-6">
+
+
+                             </div>
+
+                      </div>
+
+                   <div class="modal-footer">
+        <button type="button"   class="btn btn-secondary" data-dismiss="modal">Close</button>
+       
+      </div>
+
+                         </div>
+
+                      </div>
+
+
+
+
+                     </div>
+
+                    <!------------------------------------------------------>
+
+</div>
+                   
+                    
+                       {% endfor %} 
+
+
+                    
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+
+ 
+
+   
+  {% endblock %}   
+
+ 
+ 
+    
